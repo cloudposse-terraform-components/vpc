@@ -6,5 +6,5 @@ readme: readme/build
 
 test::
 	@echo "🚀 Starting tests..."
-	./test/run.sh
+	cd test && go test -v ./... -count=1 -timeout=10m
 	@echo "✅ All tests passed."

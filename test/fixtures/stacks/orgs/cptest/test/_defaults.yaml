@@ -1,0 +1,25 @@
+import:
+  - orgs/cptest/_defaults
+
+vars:
+  tenant: test
+  environment: use2
+
+env:
+  TF_DATA_DIR: ".terraform/test"
+
+terraform:
+  backend:
+    s3:
+      bucket: cptest-core-ue2-root-tfstate-test
+      dynamodb_table: cptest-core-ue2-root-tfstate-test-lock
+      role_arn: arn:aws:iam::822777368227:role/cptest-core-gbl-root-tfstate-test
+      encrypt: true
+      key: terraform.tfstate
+      acl: bucket-owner-full-control
+      region: us-east-2
+  remote_state_backend:
+    s3:
+      # This ensures that remote-state uses the role_arn even when
+      # the backend has role_arn overridden to be set to `null`.
+      role_arn: arn:aws:iam::822777368227:role/cptest-core-gbl-root-tfstate-test

@@ -1,0 +1,25 @@
+import:
+  - orgs/cptest/test/_defaults
+
+vars:
+  stage: basic
+
+components:
+  terraform:
+    vpc:
+      vars:
+        enabled: true
+        name: vpc
+        availability_zones:
+          - "a"
+          - "b"
+          - "c"
+        nat_gateway_enabled: true
+        nat_instance_enabled: false
+        max_subnet_count: 3
+        vpc_flow_logs_enabled: false
+        vpc_flow_logs_bucket_environment_name: ue2
+        vpc_flow_logs_bucket_stage_name: audit
+        subnet_type_tag_key: cloudposse.org/subnet/type
+        assign_generated_ipv6_cidr_block: true
+        ipv4_primary_cidr_block: 10.14.0.0/16
